@@ -18,8 +18,8 @@ class ViewController: UIViewController {
 	
 	let colorService = "beam-colorsvc"
 	
-	var vendor: ConnectivityVendor? = nil
-	var consumer: ConnectivityConsumer? = nil
+	var vendor: BeamServiceProvider? = nil
+	var consumer: BeamServiceClient? = nil
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -27,10 +27,10 @@ class ViewController: UIViewController {
 		switch UIDevice.current.userInterfaceIdiom {
 			
 		case .phone:
-			self.consumer = ConnectivityConsumer(type: colorService)
+			self.consumer = BeamServiceClient(type: colorService)
 			
 		case .pad:
-			self.vendor = ConnectivityVendor(type: colorService)
+			self.vendor = BeamServiceProvider(type: colorService)
 			self.vendor?.colorServiceDelegate = self
 			
 		default:

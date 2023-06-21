@@ -1,5 +1,5 @@
 //
-//  ConnectivityConsumer.swift
+//  BeamServiceClient.swift
 //  Beam
 //
 //  Created by Michael VanAllen on 16.04.19.
@@ -10,7 +10,7 @@ import Foundation
 import MultipeerConnectivity
 
 
-class ConnectivityConsumer: NSObject, MCNearbyServiceBrowserDelegate {
+class BeamServiceClient: NSObject, MCNearbyServiceBrowserDelegate {
 	private let serviceBrowser: MCNearbyServiceBrowser
 	
 	private let peerId = MCPeerID(displayName: UIDevice.current.name)
@@ -28,44 +28,44 @@ class ConnectivityConsumer: NSObject, MCNearbyServiceBrowserDelegate {
 		super.init()
 		self.serviceBrowser.delegate = self
 		
-		NSLog("ConnectivityConsumer.init() - start browsing for service of type '\(self.serviceType)'")
+		NSLog("BeamServiceClient.init() - start browsing for service of type '\(self.serviceType)'")
 		self.serviceBrowser.startBrowsingForPeers()
 	}
 	
 	deinit {
 		self.serviceBrowser.stopBrowsingForPeers()
-		NSLog("ConnectivityConsumer.deinit() - stopped browsing for service of type '\(self.serviceType)'")
+		NSLog("BeamServiceClient.deinit() - stopped browsing for service of type '\(self.serviceType)'")
 	}
 	
 	// MARK: MCNearbyServiceBrowserDelegate
 	
 	func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-		NSLog("# ConnectivityConsumer.foundPeer() - found peer '\(peerID.displayName)'")
+		NSLog("# BeamServiceClient.foundPeer() - found peer '\(peerID.displayName)'")
 		
-		NSLog("# ConnectivityConsumer.foundPeer() --> let's invite him!")
+		NSLog("# BeamServiceClient.foundPeer() --> let's invite him!")
 		browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 0)
 	}
 	
 	func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-		NSLog("# ConnectivityConsumer.lostPeer() - lost peer '\(peerID.displayName)'")
+		NSLog("# BeamServiceClient.lostPeer() - lost peer '\(peerID.displayName)'")
 	}
 	
 	func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
-		NSLog("# ConnectivityConsumer.didNotStartBrowsingForPeers() - discovery failed w/ error: \(error)")
+		NSLog("# BeamServiceClient.didNotStartBrowsingForPeers() - discovery failed w/ error: \(error)")
 	}
 	
 	// MARK: ColorService
 	
 	func sendColor(_ newColor: UIColor) {
-		NSLog("ConnectivityConsumer.sendColor() - will try to send new color \(newColor)..")
+		NSLog("BeamServiceClient.sendColor() - will try to send new color \(newColor)..")
 		
 		if let colorData = try? NSKeyedArchiver.archivedData(withRootObject: newColor, requiringSecureCoding: true) {
 			do {
 				try self.session.send(colorData, toPeers: self.session.connectedPeers, with: .reliable)
-				NSLog("ConnectivityConsumer.sendColor() - ..sent.")
+				NSLog("BeamServiceClient.sendColor() - ..sent.")
 
 			} catch {
-				NSLog("ConnectivityConsumer.sendColor() - send failed w/ error: \(error)")
+				NSLog("BeamServiceClient.sendColor() - send failed w/ error: \(error)")
 			}
 		}
 	}
@@ -73,32 +73,32 @@ class ConnectivityConsumer: NSObject, MCNearbyServiceBrowserDelegate {
 }
 
 
-extension ConnectivityConsumer: MCSessionDelegate {
+extension BeamServiceClient: MCSessionDelegate {
 	
 	func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-		NSLog("# ConnectivityConsumer.MCSession: peer '\(peerID.displayName)' did change state to '\(state)'")
+		NSLog("# BeamServiceClient.MCSession: peer '\(peerID.displayName)' did change state to '\(state)'")
 	}
 	
 	func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-		NSLog("# ConnectivityConsumer.MCSession: received \(data.count) bytes of data from peer '\(peerID.displayName)'")
+		NSLog("# BeamServiceClient.MCSession: received \(data.count) bytes of data from peer '\(peerID.displayName)'")
 	}
 	
 	func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-		NSLog("# ConnectivityConsumer.MCSession: received stream w/ name '\(streamName)' from peer '\(peerID.displayName)'")
+		NSLog("# BeamServiceClient.MCSession: received stream w/ name '\(streamName)' from peer '\(peerID.displayName)'")
 	}
 	
 	func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-		NSLog("# ConnectivityConsumer.MCSession: did start receiving resource w/ name '\(resourceName)' from peer '\(peerID.displayName)'")
+		NSLog("# BeamServiceClient.MCSession: did start receiving resource w/ name '\(resourceName)' from peer '\(peerID.displayName)'")
 	}
 	
 	func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-		NSLog("# ConnectivityConsumer.MCSession: did finish receiving resource w/ name '\(resourceName)' from peer '\(peerID.displayName)'")
+		NSLog("# BeamServiceClient.MCSession: did finish receiving resource w/ name '\(resourceName)' from peer '\(peerID.displayName)'")
 		NSLog("#   -> url '\(localURL?.absoluteString ?? "(nil)")'")
 		NSLog("#   error: \(error?.localizedDescription ?? "(nil)")")
 	}
 	
 	func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void) {
-		NSLog("# ConnectivityConsumer.MCSession: neat, received a certificate from peer '\(peerID.displayName)'!")
+		NSLog("# BeamServiceClient.MCSession: neat, received a certificate from peer '\(peerID.displayName)'!")
 		NSLog("#   -> I'll allow it.")
 		certificateHandler(true)
 	}

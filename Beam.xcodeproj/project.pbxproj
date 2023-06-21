@@ -12,8 +12,8 @@
 		4C55AE4622661FC200E61D60 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C55AE4422661FC200E61D60 /* Main.storyboard */; };
 		4C55AE4822661FC300E61D60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C55AE4722661FC300E61D60 /* Assets.xcassets */; };
 		4C55AE4B22661FC300E61D60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C55AE4922661FC300E61D60 /* LaunchScreen.storyboard */; };
-		4C55AE5322661FFF00E61D60 /* ConnectivityVendor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C55AE5222661FFF00E61D60 /* ConnectivityVendor.swift */; };
-		4C55AE55226623FD00E61D60 /* ConnectivityConsumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C55AE54226623FD00E61D60 /* ConnectivityConsumer.swift */; };
+		4C55AE5322661FFF00E61D60 /* BeamServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C55AE5222661FFF00E61D60 /* BeamServiceProvider.swift */; };
+		4C55AE55226623FD00E61D60 /* BeamServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C55AE54226623FD00E61D60 /* BeamServiceClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,8 +25,8 @@
 		4C55AE4722661FC300E61D60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C55AE4A22661FC300E61D60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C55AE4C22661FC300E61D60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4C55AE5222661FFF00E61D60 /* ConnectivityVendor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityVendor.swift; sourceTree = "<group>"; };
-		4C55AE54226623FD00E61D60 /* ConnectivityConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityConsumer.swift; sourceTree = "<group>"; };
+		4C55AE5222661FFF00E61D60 /* BeamServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeamServiceProvider.swift; sourceTree = "<group>"; };
+		4C55AE54226623FD00E61D60 /* BeamServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeamServiceClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,8 +60,8 @@
 		4C55AE3F22661FC200E61D60 /* Beam */ = {
 			isa = PBXGroup;
 			children = (
-				4C55AE5222661FFF00E61D60 /* ConnectivityVendor.swift */,
-				4C55AE54226623FD00E61D60 /* ConnectivityConsumer.swift */,
+				4C55AE5222661FFF00E61D60 /* BeamServiceProvider.swift */,
+				4C55AE54226623FD00E61D60 /* BeamServiceClient.swift */,
 				4C55AE4022661FC200E61D60 /* AppDelegate.swift */,
 				4C55AE4222661FC200E61D60 /* ViewController.swift */,
 				4C55AE4422661FC200E61D60 /* Main.storyboard */,
@@ -143,8 +143,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C55AE55226623FD00E61D60 /* ConnectivityConsumer.swift in Sources */,
-				4C55AE5322661FFF00E61D60 /* ConnectivityVendor.swift in Sources */,
+				4C55AE55226623FD00E61D60 /* BeamServiceClient.swift in Sources */,
+				4C55AE5322661FFF00E61D60 /* BeamServiceProvider.swift in Sources */,
 				4C55AE4322661FC200E61D60 /* ViewController.swift in Sources */,
 				4C55AE4122661FC200E61D60 /* AppDelegate.swift in Sources */,
 			);
@@ -223,7 +223,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -278,7 +278,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -295,14 +295,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 66M4S89E3T;
 				INFOPLIST_FILE = Beam/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.reactivecode-studios.Beam";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -314,14 +313,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 66M4S89E3T;
 				INFOPLIST_FILE = Beam/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.reactivecode-studios.Beam";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
