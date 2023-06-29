@@ -113,6 +113,9 @@ extension MCSessionState: CustomStringConvertible {
 		case .notConnected: return ".notConnected"
 		case .connecting: return ".connecting"
 		case .connected: return ".connected"
+		@unknown default:
+			NSLog("\(String(reflecting: self)) – discovered unknown state: \(self) (\(self.rawValue))")
+			return ".unknown"
 		}
 	}
 }
