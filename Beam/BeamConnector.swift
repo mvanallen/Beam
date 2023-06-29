@@ -24,6 +24,9 @@ import MultipeerConnectivity
 	init(peerId: String?, serviceType: String = "beam-themesvc") {
 		self.peerId = MCPeerID(displayName: peerId ?? UIDevice.current.name)
 		self.serviceType = serviceType
+		
+		// setup advertiser & browser (probably)
+		
 		super.init()
 	}
 	
@@ -61,5 +64,19 @@ extension BeamConnector: MCSessionDelegate {
 		NSLog("# \(String(reflecting: self)) – neat, received a certificate from peer '\(peerID.displayName)'!")
 		NSLog("#   -> I'll allow it.")
 		certificateHandler(true)
+	}
+}
+
+
+extension MCSessionState: CustomStringConvertible {
+	public var description: String {
+		switch self {
+		case .notConnected: return ".notConnected"
+		case .connecting: return ".connecting"
+		case .connected: return ".connected"
+		@unknown default:
+			NSLog("\(String(reflecting: self)) – discovered unknown state: \(self) (\(self.rawValue))")
+			return ".unknown"
+		}
 	}
 }
