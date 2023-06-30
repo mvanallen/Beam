@@ -18,24 +18,24 @@ class ViewController: UIViewController {
 	
 	let colorService = "beam-colorsvc"
 	
-	var vendor: BeamServiceProvider? = nil
-	var consumer: BeamServiceClient? = nil
+	var vendor: BeamConnectionProvider? = nil
+	var consumer: BeamConnectionConsumer? = nil
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+		/*
 		switch UIDevice.current.userInterfaceIdiom {
 			
 		case .phone:
-			self.consumer = BeamServiceClient(type: colorService)
+			//self.consumer = BeamConnectionConsumer(type: colorService)
 			
 		case .pad:
-			self.vendor = BeamServiceProvider(type: colorService)
+			self.vendor = BeamConnectionProvider(type: colorService)
 			self.vendor?.colorServiceDelegate = self
 			
 		default:
 			break
-		}
+		}*/
 	}
 	
 	@IBAction func pushBtn1(_ sender: UIButton) {

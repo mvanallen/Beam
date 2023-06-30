@@ -11,27 +11,25 @@ import MultipeerConnectivity
 
 
 /*actor*/ class BeamConnector: NSObject {
-	
 	let peerId: MCPeerID
 	let serviceType: String
 	
-	lazy var session: MCSession = {
-		let session = MCSession(peer: self.peerId, securityIdentity: nil, encryptionPreference: .required)
-		session.delegate = self
-		return session
-	}()
+	private var session: MCSession
 	
-	init(peerId: String?, serviceType: String = "beam-themesvc") {
-		self.peerId = MCPeerID(displayName: peerId ?? UIDevice.current.name)
+	private lazy var serviceProvider: BeamConnectionProvider = .init(peerId: peerId, serviceType: serviceType)
+	private lazy var serviceConsumer: BeamConnectionConsumer = .init(peerId: peerId, serviceType: serviceType)
+
+	init(peerName: String?, serviceType: String = "beam-themesvc") {
+		self.peerId = MCPeerID(displayName: peerName ?? UIDevice.current.name)
 		self.serviceType = serviceType
 		
-		// setup advertiser & browser (probably)
-		
+		session = MCSession(peer: self.peerId, securityIdentity: nil, encryptionPreference: .required)
 		super.init()
+		session.delegate = self
 	}
 	
 	deinit {
-		//
+		session.disconnect()
 	}
 }
 
@@ -69,11 +67,12 @@ extension BeamConnector: MCSessionDelegate {
 
 
 extension MCSessionState: CustomStringConvertible {
+	
 	public var description: String {
 		switch self {
-		case .notConnected: return ".notConnected"
-		case .connecting: return ".connecting"
-		case .connected: return ".connected"
+		case .notConnected:	return ".notConnected"
+		case .connecting:	return ".connecting"
+		case .connected:	return ".connected"
 		@unknown default:
 			NSLog("\(String(reflecting: self)) – discovered unknown state: \(self) (\(self.rawValue))")
 			return ".unknown"

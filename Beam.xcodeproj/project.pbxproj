@@ -12,8 +12,8 @@
 		4C55AE4622661FC200E61D60 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C55AE4422661FC200E61D60 /* Main.storyboard */; };
 		4C55AE4822661FC300E61D60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C55AE4722661FC300E61D60 /* Assets.xcassets */; };
 		4C55AE4B22661FC300E61D60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C55AE4922661FC300E61D60 /* LaunchScreen.storyboard */; };
-		4C55AE5322661FFF00E61D60 /* BeamServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C55AE5222661FFF00E61D60 /* BeamServiceProvider.swift */; };
-		4C55AE55226623FD00E61D60 /* BeamServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C55AE54226623FD00E61D60 /* BeamServiceClient.swift */; };
+		4C55AE5322661FFF00E61D60 /* BeamConnectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C55AE5222661FFF00E61D60 /* BeamConnectionProvider.swift */; };
+		4C55AE55226623FD00E61D60 /* BeamConnectionConsumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C55AE54226623FD00E61D60 /* BeamConnectionConsumer.swift */; };
 		4CCB30AC2A4DE91A005BAE97 /* BeamConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCB30AB2A4DE91A005BAE97 /* BeamConnector.swift */; };
 /* End PBXBuildFile section */
 
@@ -26,8 +26,8 @@
 		4C55AE4722661FC300E61D60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C55AE4A22661FC300E61D60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C55AE4C22661FC300E61D60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4C55AE5222661FFF00E61D60 /* BeamServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeamServiceProvider.swift; sourceTree = "<group>"; };
-		4C55AE54226623FD00E61D60 /* BeamServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeamServiceClient.swift; sourceTree = "<group>"; };
+		4C55AE5222661FFF00E61D60 /* BeamConnectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeamConnectionProvider.swift; sourceTree = "<group>"; };
+		4C55AE54226623FD00E61D60 /* BeamConnectionConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeamConnectionConsumer.swift; sourceTree = "<group>"; };
 		4CCB30AB2A4DE91A005BAE97 /* BeamConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeamConnector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,8 +63,8 @@
 			isa = PBXGroup;
 			children = (
 				4CCB30AB2A4DE91A005BAE97 /* BeamConnector.swift */,
-				4C55AE5222661FFF00E61D60 /* BeamServiceProvider.swift */,
-				4C55AE54226623FD00E61D60 /* BeamServiceClient.swift */,
+				4C55AE5222661FFF00E61D60 /* BeamConnectionProvider.swift */,
+				4C55AE54226623FD00E61D60 /* BeamConnectionConsumer.swift */,
 				4C55AE4022661FC200E61D60 /* AppDelegate.swift */,
 				4C55AE4222661FC200E61D60 /* ViewController.swift */,
 				4C55AE4422661FC200E61D60 /* Main.storyboard */,
@@ -147,8 +147,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C55AE55226623FD00E61D60 /* BeamServiceClient.swift in Sources */,
-				4C55AE5322661FFF00E61D60 /* BeamServiceProvider.swift in Sources */,
+				4C55AE55226623FD00E61D60 /* BeamConnectionConsumer.swift in Sources */,
+				4C55AE5322661FFF00E61D60 /* BeamConnectionProvider.swift in Sources */,
 				4C55AE4322661FC200E61D60 /* ViewController.swift in Sources */,
 				4CCB30AC2A4DE91A005BAE97 /* BeamConnector.swift in Sources */,
 				4C55AE4122661FC200E61D60 /* AppDelegate.swift in Sources */,
