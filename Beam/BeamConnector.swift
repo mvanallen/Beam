@@ -33,6 +33,51 @@ import MultipeerConnectivity
 	}
 }
 
+extension BeamConnector /* Connection management */ {
+	@frozen enum ConnectionMode {
+		case active
+		case passive
+		case stopped
+		case fullSMOrc
+	}
+	
+	var currentMode: ConnectionMode {
+		get {
+			switch (serviceProvider.active, serviceConsumer.active) {
+			case (true, true):		return .fullSMOrc
+			case (true, _):			return .active
+			case (_, true):			return .passive
+			case (false, false):	return .stopped
+			}
+		}
+	}
+	
+	func switchMode(to target: ConnectionMode) {
+		let current = currentMode
+		guard current != target else {
+			NSLog("\(String(reflecting: self)).switchMode() - already in target mode '\(target)', chilling.")
+			return
+		}
+		
+		NSLog("\(String(reflecting: self)).switchMode() - switching to target mode '\(target)'..")
+		switch target {
+		case .fullSMOrc:
+			serviceProvider.start()
+			serviceConsumer.start()
+		case .active:
+			serviceProvider.start()
+			serviceConsumer.stop()
+		case .passive:
+			serviceProvider.stop()
+			serviceConsumer.start()
+		case .stopped:
+			serviceProvider.stop()
+			serviceConsumer.stop()
+		}
+		NSLog("\(String(reflecting: self)).switchMode() - ..done.")
+	}
+}
+
 
 extension BeamConnector: MCSessionDelegate {
 	
@@ -75,7 +120,7 @@ extension MCSessionState: CustomStringConvertible {
 		case .connected:	return ".connected"
 		@unknown default:
 			NSLog("\(String(reflecting: self)) – discovered unknown state: \(self) (\(self.rawValue))")
-			return ".unknown"
+			return ".unknown(\(self.rawValue))"
 		}
 	}
 }

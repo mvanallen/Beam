@@ -22,6 +22,8 @@ class BeamConnectionProvider: NSObject {	// might have common superclass w/ othe
 		return advertiser
 	}()
 	
+	@Published private(set) var active: Bool = false
+	
 	public var invitationHandler: InvitationHandler?
 	
 	required init(peerId: MCPeerID, serviceType: String) {
@@ -37,16 +39,19 @@ class BeamConnectionProvider: NSObject {	// might have common superclass w/ othe
 	
 	func start(with handler: @escaping InvitationHandler) {
 		invitationHandler = handler
-		
+		start()
+	}
+	
+	func start() {
 		NSLog("\(String(reflecting: self)).start() - start advertising service of type '\(self.serviceType)'")
+		active = true
 		serviceAdvertiser.startAdvertisingPeer()
 	}
 	
 	func stop() {
 		serviceAdvertiser.stopAdvertisingPeer()
+		active = false
 		NSLog("\(String(reflecting: self)).stop() - stopped advertising service of type '\(self.serviceType)'")
-		
-		invitationHandler = nil
 	}
 }
 

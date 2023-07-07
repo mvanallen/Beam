@@ -22,16 +22,16 @@ class BeamConnectionConsumer: NSObject {	// might have common superclass w/ othe
 		return browser
 	}()
 	
+	@Published private(set) var active: Bool = false
 	@MainActor @Published var availablePeers: Set<MCPeerID> = []
+	
 	public var discoveryHandler: DiscoveryHandler?
 	
-	required init(peerId: MCPeerID, serviceType: String) {
+	init(peerId: MCPeerID, serviceType: String) {
 		self.peerId = peerId
 		self.serviceType = serviceType
 		
 		super.init()
-		
-		//self.serviceBrowser.startBrowsingForPeers()
 	}
 	
 	deinit {
@@ -40,16 +40,20 @@ class BeamConnectionConsumer: NSObject {	// might have common superclass w/ othe
 	
 	func start(with handler: @escaping DiscoveryHandler) {
 		discoveryHandler = handler
-		
+		start()
+	}
+	
+	func start() {
 		NSLog("\(String(reflecting: self)).start() - start browsing for service of type '\(self.serviceType)'")
+		active = true
 		serviceBrowser.startBrowsingForPeers()
 	}
 
 	func stop() {
 		serviceBrowser.stopBrowsingForPeers()
+		active = false
 		NSLog("\(String(reflecting: self)).stop() - stopped browsing for service of type '\(self.serviceType)'")
 		
-		discoveryHandler = nil
 		Task { @MainActor in availablePeers.removeAll() }
 	}
 }
